@@ -15,27 +15,36 @@ interface FileManagerState {
   ) => void;
 }
 
+const createFileId = (file: File) =>
+  `${file.name}-${file.size}-${file.lastModified}-${Math.random()
+    .toString(36)
+    .slice(2, 9)}`;
+
 export const useFileManagerStore = create<FileManagerState>((set) => ({
   files: [],
 
   appendFiles: (acceptedFiles) =>
     set((state) => {
-      const notDuplicatedNewFiles: ExtendedFile[] = acceptedFiles
+      // Deduplicate only within the new batch (not against existing files),
+      // so users can re-upload the same image again later.
+      const seenInBatch = new Set<string>();
+
+      const newFiles: ExtendedFile[] = acceptedFiles
         .filter((file) => {
-          const isDuplicate = state.files.some(
-            (subItem) => subItem.id === `${file.name}${file.size}`
-          );
-          return !isDuplicate;
+          const key = `${file.name}-${file.size}-${file.lastModified}`;
+          if (seenInBatch.has(key)) return false;
+          seenInBatch.add(key);
+          return true;
         })
         .map((file) => ({
           file,
-          id: `${file.name}${file.size}`,
+          id: createFileId(file),
           uploadStatus: "idle",
           uploadProgress: 0,
         }));
 
       return {
-        files: [...state.files, ...notDuplicatedNewFiles],
+        files: [...state.files, ...newFiles],
       };
     }),
 

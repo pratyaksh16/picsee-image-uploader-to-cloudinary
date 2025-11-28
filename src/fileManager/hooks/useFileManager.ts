@@ -35,7 +35,6 @@ export function useFileManager() {
   const clearFiles = useFileManagerStore((state) => state.clearFiles);
 
   const uploadMutation = useCloudinaryUploadMutation();
-  const lastIdleFilesRef = useRef<Set<string>>(new Set());
   const pasteHandlerRef = useRef<((event: ClipboardEventLike) => void) | null>(
     null
   );
@@ -177,19 +176,14 @@ export function useFileManager() {
     pasteHandlerRef.current = handlePaste;
   }, [handlePaste]);
 
+  // Automatically upload any files that enter the "idle" state.
+  // We only start a new batch when no other upload is currently in progress.
   useEffect(() => {
     const idleFiles = files.filter((f) => f.uploadStatus === "idle");
-    const currentIdleIds = new Set(idleFiles.map((f) => f.id));
+    if (idleFiles.length === 0) return;
+    if (uploadMutation.isPending) return;
 
-    // Only trigger if NEW idle files appear (avoid infinite loop)
-    const hasNewIdleFiles = idleFiles.some(
-      (f) => !lastIdleFilesRef.current.has(f.id)
-    );
-
-    if (hasNewIdleFiles && idleFiles.length > 0) {
-      uploadMutation.mutate(idleFiles);
-      lastIdleFilesRef.current = currentIdleIds;
-    }
+    uploadMutation.mutate(idleFiles);
   }, [files, uploadMutation]);
 
   // Global paste listener (captures paste even when drop area isn't focused)
