@@ -44,7 +44,8 @@ export const useFileManagerStore = create<FileManagerState>((set) => ({
         }));
 
       return {
-        files: [...state.files, ...newFiles],
+        // Prepend new files so the most recently added ones appear first
+        files: [...newFiles, ...state.files],
       };
     }),
 
