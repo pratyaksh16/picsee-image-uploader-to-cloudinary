@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+## Picsee – Image Uploader to Cloudinary 📸☁️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **What it is**: A small, production-ready image uploader with drag-and-drop, previews, and smooth upload progress.
+- **What it delivers**: Multi-file uploads to Cloudinary with per-file status, retries, and a clean desktop/mobile-friendly UI.
 
-Currently, two official plugins are available:
+## Tech Stack ⚙️
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Core**: React ⚛️, TypeScript 🧩, Vite ⚡.
+- **State**: Lightweight `zustand` 🐻 store for file manager state.
+- **UI**: Material UI 🎨 for fast, consistent component styling.
+- **Animations**: `auto-animate` ✨ for smooth `UploadProgressCard` transitions.
 
-## React Compiler
+## Features at a Glance 🚀
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Uploads**: Drag & drop, click-to-upload, multi-file selection, image-only validation (jpg, jpeg, png, gif, webp), 5MB max per file.
+- **File Management**: Thumbnails, file size, per-file progress and status (pending/uploading/success/error), remove and retry support.
+- **UX States**: Empty, hover, drag-active, loading, success, and error states with clear feedback.
+- **Responsiveness**: Layout tuned for both desktop and mobile usage 📱💻.
 
-## Expanding the ESLint configuration
+## Prerequisites 🧰
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Node**: v24+ recommended.
+- **Package Manager**: npm v11+ (or compatible).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Setup & Environment 🔧
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Install deps**:
+  - `npm install`
+- **Create `.env` in project root** with:
+  - `VITE_CLOUDINARY_API_URL`
+  - `VITE_CLOUDINARY_CLOUD_NAME`
+  - `VITE_CLOUDINARY_UPLOAD_PRESET`
+  - `VITE_CLOUDINARY_API_KEY`
+  - `VITE_CLOUDINARY_API_SECRET`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Running Locally 💻
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Dev server**: `npm run dev` then open the shown `localhost` URL.
+- **Production build**: `npm run build` and optionally `npm run preview` to test the built app.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Demo Video (Coming Soon) 🎥
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Overview**: Short walkthrough covering drag-drop, mobile flow, validations, retries, and Cloudinary uploads.
+- **Link**: Demo URL will be added here once recorded.
+
+## Support the Project ❤️
+
+- **Star it**: If you like this, drop a ⭐ on the GitHub repo to help it reach more devs.
+- **Share it**: Feel free to share the repo or demo video with friends, teams, or on socials.
