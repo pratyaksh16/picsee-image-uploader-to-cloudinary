@@ -40,7 +40,7 @@
 
 ## Demo Video 🎥
 
-<img width="1634" height="917" alt="image" src="https://github.com/user-attachments/assets/7619c877-640f-4baa-9dbc-425f2db1da2c" />
+<img width="1188" height="871" alt="image" src="https://github.com/user-attachments/assets/7150a351-bb79-43d1-9099-36f72bb42ff7" />
 
 - **Overview**: Short walkthrough covering drag-drop, mobile flow, validations, retries, and Cloudinary uploads.
 - **Link**: [`Demo.mp4`](Demo.mp4) and [`Review_Changes_Demo.mp4`](Review_Changes_Demo.mp4) in the project root shows drag-drop uploads, progress cards, validations, retries, and Cloudinary integration end-to-end.
