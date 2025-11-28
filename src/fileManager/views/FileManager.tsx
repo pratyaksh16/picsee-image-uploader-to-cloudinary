@@ -18,7 +18,8 @@ export function FileManager() {
         dropzone,
         isMobile,
         isDarkMode,
-        autoAnimateRef
+        autoAnimateRef,
+        cardsAutoAnimateRef,
     } = useFileManager();
 
     const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = dropzone;
@@ -125,7 +126,7 @@ export function FileManager() {
                 )}
             </Box>
 
-            {/* Overall Progress Bar */}
+            {/* Overall Progress Bar + upload cards */}
             <Stack sx={{ gap: 2, width: 1 }} ref={autoAnimateRef}>
                 {shouldShowOverallProgress && (
                     <Box
@@ -162,11 +163,33 @@ export function FileManager() {
                     </Box>
                 )}
 
-                {files.map((file) => (
-                    <Stack key={file.id}>
-                        <UploadProgressCard {...file} />
-                    </Stack>
-                ))}
+                {files.length > 0 && (
+                    <Box
+                        ref={cardsAutoAnimateRef}
+                        sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 2,
+                            justifyContent: { xs: "center", sm: "flex-start" },
+                        }}
+                    >
+                        {files.map((file) => (
+                            <Box
+                                key={file.id}
+                                sx={{
+                                    flex: {
+                                        xs: "1 1 260px",
+                                        sm: "1 1 260px",
+                                        md: "1 1 280px",
+                                    },
+                                    maxWidth: 360,
+                                }}
+                            >
+                                <UploadProgressCard {...file} />
+                            </Box>
+                        ))}
+                    </Box>
+                )}
             </Stack>
         </>
     );

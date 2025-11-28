@@ -31,6 +31,7 @@ export function useFileManager() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDarkMode = theme.palette.mode === "dark";
   const [autoAnimateRef] = useAutoAnimate();
+  const [cardsAutoAnimateRef] = useAutoAnimate();
 
   const files = useFileManagerStore((state) => state.files);
   const appendFiles = useFileManagerStore((state) => state.appendFiles);
@@ -216,6 +217,7 @@ export function useFileManager() {
     handlePaste,
     dropzone,
     autoAnimateRef,
+    cardsAutoAnimateRef,
 
     // Handlers
     handleFileDrop,

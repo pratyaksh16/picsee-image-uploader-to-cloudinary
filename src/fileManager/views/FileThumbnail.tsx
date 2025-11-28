@@ -1,11 +1,12 @@
 import InsertPhotoRoundedIcon from "@mui/icons-material/InsertPhotoRounded";
 import InsertDriveFileRoundedIcon from "@mui/icons-material/InsertDriveFileRounded";
 import { useEffect, useState } from "react";
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 
 type FileThumbnailProps = {
     name: string;
     file?: File;
+    variant?: "avatar" | "card";
 };
 
 function isImageExtension(extension?: string) {
@@ -22,7 +23,9 @@ function isImageExtension(extension?: string) {
     }
 }
 
-export function FileThumbnail({ name, file }: FileThumbnailProps) {
+const CARD_PREVIEW_HEIGHT = 180;
+
+export function FileThumbnail({ name, file, variant = "avatar" }: FileThumbnailProps) {
     const extension = name.split(".").pop()?.toLowerCase();
     const isImage = isImageExtension(extension);
     const [preview, setPreview] = useState<string | null>(null);
@@ -42,6 +45,22 @@ export function FileThumbnail({ name, file }: FileThumbnailProps) {
     }, [isImage, file]);
 
     if (isImage && preview) {
+        if (variant === "card") {
+            return (
+                <Box
+                    component="img"
+                    src={preview}
+                    alt={name}
+                    sx={{
+                        width: 1,
+                        height: CARD_PREVIEW_HEIGHT,
+                        objectFit: "cover",
+                        display: "block",
+                    }}
+                />
+            );
+        }
+
         return (
             <Avatar
                 src={preview}
@@ -55,8 +74,46 @@ export function FileThumbnail({ name, file }: FileThumbnailProps) {
     }
 
     if (isImage) {
-        return <InsertPhotoRoundedIcon fontSize="large" color="primary" />;
+        const icon = <InsertPhotoRoundedIcon fontSize="large" color="primary" />;
+
+        if (variant === "card") {
+            return (
+                <Box
+                    sx={{
+                        width: 1,
+                        height: CARD_PREVIEW_HEIGHT,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: "action.hover",
+                    }}
+                >
+                    {icon}
+                </Box>
+            );
+        }
+
+        return icon;
     }
 
-    return <InsertDriveFileRoundedIcon fontSize="large" color="primary" />;
+    const fileIcon = <InsertDriveFileRoundedIcon fontSize="large" color="primary" />;
+
+    if (variant === "card") {
+        return (
+            <Box
+                sx={{
+                    width: 1,
+                    height: CARD_PREVIEW_HEIGHT,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: "action.hover",
+                }}
+            >
+                {fileIcon}
+            </Box>
+        );
+    }
+
+    return fileIcon;
 }
