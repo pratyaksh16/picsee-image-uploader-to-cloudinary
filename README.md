@@ -39,10 +39,11 @@
 - **Production build**: `npm run build` and optionally `npm run preview` to test the built app.
 
 ## Demo Video 🎥
+
 <img width="1634" height="917" alt="image" src="https://github.com/user-attachments/assets/7619c877-640f-4baa-9dbc-425f2db1da2c" />
 
 - **Overview**: Short walkthrough covering drag-drop, mobile flow, validations, retries, and Cloudinary uploads.
-- **Link**: [`Demo.mp4`](Demo.mp4) in the project root shows drag-drop uploads, progress cards, validations, retries, and Cloudinary integration end-to-end.
+- **Link**: [`Demo.mp4`](Demo.mp4) and [`Review_Changes_Demo.mp4`](Review_Changes_Demo.mp4) in the project root shows drag-drop uploads, progress cards, validations, retries, and Cloudinary integration end-to-end.
 
 ## Support the Project ❤️
 
