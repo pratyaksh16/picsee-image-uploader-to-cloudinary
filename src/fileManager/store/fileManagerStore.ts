@@ -7,6 +7,7 @@ interface FileManagerState {
   // Actions (mutations)
   appendFiles: (files: File[]) => void;
   removeFile: (fileId: string) => void;
+  clearFiles: () => void;
   updateUploadProgress: (fileId: string, progress: number) => void;
   updateUploadStatus: (
     fileId: string,
@@ -41,6 +42,11 @@ export const useFileManagerStore = create<FileManagerState>((set) => ({
   removeFile: (id) =>
     set((state) => ({
       files: state.files.filter((file) => file.id !== id),
+    })),
+
+  clearFiles: () =>
+    set(() => ({
+      files: [],
     })),
 
   updateUploadProgress: (id, uploadProgress) =>

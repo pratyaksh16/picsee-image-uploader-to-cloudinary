@@ -8,8 +8,7 @@ import {
     CardHeader,
     Typography,
 } from "@mui/material";
-
-import { Box, LinearProgress } from "@mui/material";
+import { Box, LinearProgress, alpha } from "@mui/material";
 
 export function UploadProgressCard(extendedFile: ExtendedFile) {
     const {
@@ -29,14 +28,21 @@ export function UploadProgressCard(extendedFile: ExtendedFile) {
 
     return (
         <Card
-            sx={{ textAlign: "left" }}
+            sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.grey[500], 0.1),
+                borderRadius: `${theme.shape.borderRadius}px`,
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                textAlign: "left"
+            })}
             component="div"
             onClick={(e) => e.stopPropagation()}
         >
             <CardHeader
-                sx={{ alignItems: "center" }}
+                sx={{ display: "flex", alignItems: "center" }}
                 action={
-                    <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: 1 }}>
                         <ProgressIndicatorIcon
                             uploadStatus={extendedFile.uploadStatus}
                             uploadProgress={uploadProgress}

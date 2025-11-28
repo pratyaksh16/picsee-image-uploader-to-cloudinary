@@ -84,13 +84,13 @@ export function useUploadProgressCard(
       case "error":
         return "Upload failed. Click retry to upload again.";
       case "pending":
-        return `Uploading... ${Math.round(uploadProgress ?? 0)}%`;
+        return `Uploading... `;
       case "idle":
         return "Preparing to upload...";
       default:
         return "";
     }
-  }, [extendedFile.uploadStatus, uploadProgress]);
+  }, [extendedFile.uploadStatus]);
 
   // Handle remove file
   const handleRemoveClick = useCallback(() => {

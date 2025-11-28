@@ -3,23 +3,39 @@ import { useFileManagerStore } from "@/fileManager/store/fileManagerStore";
 import { useCloudinaryUploadMutation } from "@/fileManager/hooks/mutations/useCloudinaryUploadMutation";
 import type { FileRejection } from "react-dropzone";
 
-const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-/**
- * useFileManager - Main business logic hook for FileManager component
- * Combines:
- * - File drop handling (from useFileManagerController)
- * - Rejection message management
- * - Auto-retry upload logic (Solution 3)
- */
 export function useFileManager() {
   const files = useFileManagerStore((state) => state.files);
   const appendFiles = useFileManagerStore((state) => state.appendFiles);
+  const clearFiles = useFileManagerStore((state) => state.clearFiles);
 
   const uploadMutation = useCloudinaryUploadMutation();
   const lastIdleFilesRef = useRef<Set<string>>(new Set());
 
   const [rejectionMessages, setRejectionMessages] = useState<string[]>([]);
+
+  const hasFiles = files.length > 0;
+  const filesInProgress = files.filter(
+    (file) => file.uploadStatus === "idle" || file.uploadStatus === "pending"
+  );
+  const shouldShowOverallProgress = filesInProgress.length > 0;
+
+  const overallProgress = hasFiles
+    ? files.reduce((sum, file) => {
+        if (file.uploadStatus === "success") {
+          return sum + 100;
+        }
+        return sum + (file.uploadProgress ?? 0);
+      }, 0) / files.length
+    : 0;
+
+  const shouldShowClearAll =
+    hasFiles && files.every((file) => file.uploadStatus === "success");
+
+  const handleClearAll = useCallback(() => {
+    clearFiles();
+  }, [clearFiles]);
 
   /**
    * Handle file drop from dropzone
@@ -64,10 +80,6 @@ export function useFileManager() {
     setRejectionMessages((prev) => prev.filter((_, idx) => idx !== index));
   }, []);
 
-  /**
-   * Auto-retry: Trigger upload when new idle files are added
-   * This is the SINGLE POINT where auto-retry logic lives (Solution 3)
-   */
   useEffect(() => {
     const idleFiles = files.filter((f) => f.uploadStatus === "idle");
     const currentIdleIds = new Set(idleFiles.map((f) => f.id));
@@ -81,8 +93,7 @@ export function useFileManager() {
       uploadMutation.mutate(idleFiles);
       lastIdleFilesRef.current = currentIdleIds;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files]); // Only depend on files, not uploadMutation (it's stable from useMutation)
+  }, [files, uploadMutation]);
 
   return {
     // State
@@ -90,10 +101,14 @@ export function useFileManager() {
     rejectionMessages,
     isUploading: uploadMutation.isPending,
     maxFileSize: MAX_FILE_SIZE,
+    overallProgress,
+    shouldShowOverallProgress,
+    shouldShowClearAll,
 
     // Handlers
     handleFileDrop,
     onDropRejected,
     clearRejectionMessage,
+    handleClearAll,
   };
 }
