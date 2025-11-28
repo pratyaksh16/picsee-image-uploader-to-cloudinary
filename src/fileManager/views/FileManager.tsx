@@ -25,6 +25,9 @@ export function FileManager() {
 
     const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = dropzone;
 
+    // ❗ intentional test error to check ErrorBoundary works
+    // throw new Error("Test ErrorBoundary: this is an intentional crash");
+
     return (
         <>
             <Box
