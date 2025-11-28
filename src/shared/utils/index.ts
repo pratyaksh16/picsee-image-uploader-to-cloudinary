@@ -1,0 +1,1 @@
+export { convertByteToMegabyte } from "./convertByteToMegabyte";
