@@ -5,6 +5,7 @@ import { useCloudinaryUploadMutation } from "@/fileManager/hooks/mutations/useCl
 import { useDropzone } from "react-dropzone";
 import type { Accept, FileRejection } from "react-dropzone";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useTheme } from "@mui/material/styles";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -29,6 +30,7 @@ export function useFileManager() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDarkMode = theme.palette.mode === "dark";
+  const [autoAnimateRef] = useAutoAnimate();
 
   const files = useFileManagerStore((state) => state.files);
   const appendFiles = useFileManagerStore((state) => state.appendFiles);
@@ -213,6 +215,7 @@ export function useFileManager() {
     isDarkMode,
     handlePaste,
     dropzone,
+    autoAnimateRef,
 
     // Handlers
     handleFileDrop,

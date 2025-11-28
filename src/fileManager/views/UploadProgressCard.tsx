@@ -19,6 +19,7 @@ export function UploadProgressCard(extendedFile: ExtendedFile) {
         statusMessage,
         onRemoveClick,
         onRetryClick,
+        displayName,
     } = useUploadProgressCard(extendedFile);
 
     // Don't render if not visible (e.g., idle state)
@@ -58,7 +59,11 @@ export function UploadProgressCard(extendedFile: ExtendedFile) {
                         file={extendedFile.file}
                     />
                 }
-                title={extendedFile.file.name}
+                title={
+                    <Typography variant="body2">
+                        {displayName}
+                    </Typography>
+                }
                 subheader={
                     <Box>
                         <Typography sx={{ marginBottom: 0.5 }} variant="caption">
@@ -94,7 +99,7 @@ export function UploadProgressCard(extendedFile: ExtendedFile) {
                         )}
                     </Box>
                 }
-                disableTypography
+            // disableTypography
             />
         </Card>
     );

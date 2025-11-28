@@ -7,6 +7,7 @@ export interface UploadProgressCardState {
   statusColor: "success" | "error" | "info" | "inherit";
   showSuccessCheckmark: boolean;
   isVisible: boolean;
+  displayName: string;
   statusMessage: string;
   onRemoveClick: () => void;
   onRetryClick: () => void;
@@ -102,11 +103,22 @@ export function useUploadProgressCard(
     updateUploadStatus(extendedFile.id, "idle");
   }, [extendedFile.id, updateUploadStatus]);
 
+  const truncateFileName = useCallback(
+    (name: string, maxLength = 50): string => {
+      if (name.length <= maxLength) {
+        return name;
+      }
+      return `${name.slice(0, maxLength)}...`;
+    },
+    []
+  );
+
   return {
     uploadProgress: uploadProgress ?? 0,
     statusColor: getStatusColor(),
     showSuccessCheckmark,
     isVisible: isVisible(),
+    displayName: truncateFileName(extendedFile.file.name, 30),
     statusMessage: getStatusMessage(),
     onRemoveClick: handleRemoveClick,
     onRetryClick: handleRetryClick,

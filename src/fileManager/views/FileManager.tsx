@@ -1,7 +1,6 @@
 // Files list UI removed — this project now only supports uploads
 import { UploadProgressCard } from "./UploadProgressCard";
 import { useFileManager } from "@/fileManager/hooks/useFileManager";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 import { LinearProgress, alpha, Box, Button, colors, Stack, Typography } from "@mui/material";
 import Alert from "@mui/material/Alert";
@@ -19,9 +18,8 @@ export function FileManager() {
         dropzone,
         isMobile,
         isDarkMode,
+        autoAnimateRef
     } = useFileManager();
-
-    const [autoAnimateRef] = useAutoAnimate();
 
     const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = dropzone;
 
@@ -30,6 +28,16 @@ export function FileManager() {
 
     return (
         <>
+            <Box display="flex" justifyContent="center" alignItems="center" width="100%" mb={2}>
+                <Box
+                    component="img"
+                    src="/picsee_logo.png"
+                    alt="Picsee Logo"
+                    width={100}
+                    height={100}
+                    sx={{ display: "block", mx: "auto" }}
+                />
+            </Box>
             <Box
                 sx={(theme) => {
                     const borderColor = isDragAccept
