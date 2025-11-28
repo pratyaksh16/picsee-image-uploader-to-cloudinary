@@ -31,6 +31,8 @@ export function useCloudinaryUploadMutation() {
           const formData = new FormData();
           formData.append("file", file.file);
           formData.append("upload_preset", uploadPreset);
+          // ❗ intentional test error to check Retry functionality
+          // formData.append("upload_preset", uploadPreset + "1");
           formData.append("tags", "picsee_tag");
 
           try {
