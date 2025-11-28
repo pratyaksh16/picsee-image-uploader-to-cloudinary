@@ -38,10 +38,10 @@
 - **Dev server**: `npm run dev` then open the shown `localhost` URL.
 - **Production build**: `npm run build` and optionally `npm run preview` to test the built app.
 
-## Demo Video (Coming Soon) 🎥
+## Demo Video 🎥
 
 - **Overview**: Short walkthrough covering drag-drop, mobile flow, validations, retries, and Cloudinary uploads.
-- **Link**: Demo URL will be added here once recorded.
+- **Link**: [`Demo.mp4`](Demo.mp4) in the project root shows drag-drop uploads, progress cards, validations, retries, and Cloudinary integration end-to-end.
 
 ## Support the Project ❤️
 
