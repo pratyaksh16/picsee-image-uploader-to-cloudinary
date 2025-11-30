@@ -1,6 +1,6 @@
 import { FileThumbnail } from "./FileThumbnail";
 import { ProgressIndicatorIcon } from "./ProgressIndicatorIcon";
-import type { ExtendedFile } from "@/fileManager/models/ExtendedFile";
+import type { ExtendedFile } from "@/fileManager/models/types/ExtendedFile";
 import { convertByteToMegabyte } from "@/shared/utils/convertByteToMegabyte";
 import { useUploadProgressCard } from "@/fileManager/hooks/useUploadProgressCard";
 import { Card, Typography } from "@mui/material";

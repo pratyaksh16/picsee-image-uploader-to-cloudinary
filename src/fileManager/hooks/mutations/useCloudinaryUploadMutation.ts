@@ -1,5 +1,5 @@
-import { useFileManagerStore } from "@/fileManager/store/fileManagerStore";
-import type { ExtendedFile } from "@/fileManager/models/ExtendedFile";
+import { useFileManagerStore } from "@/fileManager/models/store/fileManagerStore";
+import type { ExtendedFile } from "@/fileManager/models/types/ExtendedFile";
 import { useMutation } from "@tanstack/react-query";
 import { httpClient } from "@/shared/services/httpClient";
 

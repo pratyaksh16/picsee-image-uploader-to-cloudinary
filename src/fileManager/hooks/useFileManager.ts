@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ClipboardEvent as ReactClipboardEvent } from "react";
-import { useFileManagerStore } from "@/fileManager/store/fileManagerStore";
+import { useFileManagerStore } from "@/fileManager/models/store/fileManagerStore";
 import { useCloudinaryUploadMutation } from "@/fileManager/hooks/mutations/useCloudinaryUploadMutation";
 import { useDropzone } from "react-dropzone";
 import type { Accept, FileRejection } from "react-dropzone";
@@ -214,7 +214,6 @@ export function useFileManager() {
     shouldShowClearAll,
     isMobile,
     isDarkMode,
-    handlePaste,
     dropzone,
     autoAnimateRef,
     cardsAutoAnimateRef,

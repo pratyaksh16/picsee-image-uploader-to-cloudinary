@@ -14,7 +14,6 @@ export function FileManager() {
         shouldShowOverallProgress,
         shouldShowClearAll,
         handleClearAll,
-        handlePaste,
         dropzone,
         isMobile,
         isDarkMode,
@@ -66,7 +65,6 @@ export function FileManager() {
                     };
                 }}
                 {...getRootProps()}
-                onPaste={handlePaste}
             >
                 <Box component="input" {...getInputProps()} />
 

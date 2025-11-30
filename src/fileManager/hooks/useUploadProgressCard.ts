@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ExtendedFile } from "@/fileManager/models/ExtendedFile";
-import { useFileManagerStore } from "@/fileManager/store/fileManagerStore";
+import type { ExtendedFile } from "@/fileManager/models/types/ExtendedFile";
+import { useFileManagerStore } from "@/fileManager/models/store/fileManagerStore";
 
 export interface UploadProgressCardState {
   uploadProgress: number;

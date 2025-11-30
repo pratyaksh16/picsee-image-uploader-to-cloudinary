@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ExtendedFile } from "@/fileManager/models/ExtendedFile";
+import type { ExtendedFile } from "@/fileManager/models/types/ExtendedFile";
 
 interface FileManagerState {
   files: ExtendedFile[];
